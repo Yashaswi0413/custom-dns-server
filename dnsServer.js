@@ -43,7 +43,9 @@ function createDNSResponse(msg,ipAddress) {
 }
 
 function ipToInteger(ip) {
-    return ip.split('.').reduce((int,octet) => (int << 8) + parseInt(octet,10),0)
+    return ip.split('.').reduce((int, octet) => {
+        return (int << 8) | parseInt(octet, 10);
+    }, 0) >>> 0;
 }
 
 server.on('message' , (msg,rinfo) => {
